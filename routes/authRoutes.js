@@ -2,7 +2,7 @@ const express = require("express");
 const bcrypt = require("bcryptjs");
 const jwt = require("jsonwebtoken");
 const { body, validationResult } = require("express-validator");
-const User = require("../models/User");
+const { User } = require("../models");
 require("dotenv").config();
 
 const router = express.Router();
@@ -13,7 +13,8 @@ router.post(
   [body("username").notEmpty(), body("password").isLength({ min: 6 })],
   async (req, res) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+    if (!errors.isEmpty())
+      return res.status(400).json({ errors: errors.array() });
 
     const { username, password } = req.body;
     try {
@@ -34,17 +35,28 @@ router.post(
   [body("username").notEmpty(), body("password").notEmpty()],
   async (req, res) => {
     const errors = validationResult(req);
-    if (!errors.isEmpty()) return res.status(400).json({ errors: errors.array() });
+    if (!errors.isEmpty())
+      return res.status(400).json({ errors: errors.array() });
 
     const { username, password } = req.body;
     try {
       const user = await User.findOne({ where: { username } });
-      if (!user) return res.status(400).json({ message: "Invalid username or password" });
+      if (!user)
+        return res
+          .status(400)
+          .json({ message: "Invalid username or password" });
 
       const isMatch = await bcrypt.compare(password, user.password);
-      if (!isMatch) return res.status(400).json({ message: "Invalid username or password" });
+      if (!isMatch)
+        return res
+          .status(400)
+          .json({ message: "Invalid username or password" });
 
-      const token = jwt.sign({ id: user.id, username: user.username }, process.env.JWT_SECRET, { expiresIn: "1h" });
+      const token = jwt.sign(
+        { id: user.id, username: user.username },
+        process.env.JWT_SECRET,
+        { expiresIn: "1h" }
+      );
 
       res.json({ token });
     } catch (error) {

@@ -1,31 +1,35 @@
-const { DataTypes, Model } = require('sequelize');
-const sequelize = require('../config/database');  // Ensure this is correct
+"use strict";
+const { Model, DataTypes } = require("sequelize");
 
-class User extends Model {}
-
-User.init(
-  {
-    id: {
-      type: DataTypes.UUID,
-      defaultValue: DataTypes.UUIDV4,
-      primaryKey: true,
-    },
-    username: {
-      type: DataTypes.STRING,
-      allowNull: false,
-      unique: true,
-    },
-    password: {
-      type: DataTypes.STRING,
-      allowNull: false,
-    },
-  },
-  {
-    sequelize,  // This ensures the Sequelize instance is passed
-    modelName: 'User',
-    tableName: 'users',
-    timestamps: false,
+module.exports = (sequelize) => {
+  class User extends Model {
+    static associate(models) {
+      // Define associations here if needed
+    }
   }
-);
 
-module.exports = User;
+  User.init(
+    {
+      id: {
+        type: DataTypes.UUID,
+        defaultValue: DataTypes.UUIDV4, // Automatically generates a UUID
+        primaryKey: true, // Mark as primary key
+      },
+      username: {
+        type: DataTypes.STRING,
+        allowNull: false, // Ensure username is required
+        unique: true, // Ensure username is unique
+      },
+      password: {
+        type: DataTypes.STRING,
+        allowNull: false, // Ensure password is required
+      },
+    },
+    {
+      sequelize,
+      modelName: "User",
+    }
+  );
+
+  return User;
+};
