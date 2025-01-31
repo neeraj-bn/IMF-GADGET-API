@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
-const { Gadget } = require("../models");
-const authMiddleware = require("../middleware/authMiddleware");
+const { Gadget } = require("../../models");
+const authMiddleware = require("../../middleware/authMiddleware");
 
 
 // GET all gadgets
