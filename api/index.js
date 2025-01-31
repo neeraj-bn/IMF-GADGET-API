@@ -12,6 +12,9 @@ app.use(helmet());
 const sequelize = new Sequelize(process.env.DATABASE_URL, { dialect: "postgres" });
 
 // Import Routes
+app.get("/", (req, res) => {
+  res.json({ message: "Server running" });
+});
 const gadgetRoutes = require("./routes/gadgetRoutes");
 app.use("/gadgets", gadgetRoutes);
 
