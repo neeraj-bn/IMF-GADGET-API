@@ -4,6 +4,10 @@
     "password": "npg_iRH9uEBt4efZ",
     "database": "imf_gadgets",
     "host": "ep-old-cherry-a1jekd4j-pooler.ap-southeast-1.aws.neon.tech",
+    "dialect": "postgres"
+  },
+  "production": {
+    "use_env_variable": "DATABASE_URL",
     "dialect": "postgres",
     "dialectOptions": {
       "ssl": {
