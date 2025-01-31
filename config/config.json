@@ -11,5 +11,31 @@
         "rejectUnauthorized": false
       }
     }
+  },
+  "test": {
+    "username": "neondb_owner",
+    "password": "npg_iRH9uEBt4efZ",
+    "database": "imf_gadgets",
+    "host": "ep-old-cherry-a1jekd4j-pooler.ap-southeast-1.aws.neon.tech",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
+  },
+  "production": {
+    "username": "neondb_owner",
+    "password": "npg_iRH9uEBt4efZ",
+    "database": "imf_gadgets",
+    "host": "ep-old-cherry-a1jekd4j-pooler.ap-southeast-1.aws.neon.tech",
+    "dialect": "postgres",
+    "dialectOptions": {
+      "ssl": {
+        "require": true,
+        "rejectUnauthorized": false
+      }
+    }
   }
 }
